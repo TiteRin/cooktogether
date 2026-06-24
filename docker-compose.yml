@@ -1,9 +1,11 @@
 services:
-  web:
+  cooktogether:
     build: .
+    container_name: cooktogether
     ports:
       - "4321:4321"
     volumes:
       - ./recipes:/app/recipes
     environment:
       - NODE_ENV=production
+    restart: unless-stopped

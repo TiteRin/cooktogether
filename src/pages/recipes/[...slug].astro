@@ -5,25 +5,9 @@ import { loadRecipe } from '../../lib/recipeLoader';
 import { findRecipes } from '../../lib/recipeDiscovery';
 import path from 'node:path';
 
-export async function getStaticPaths() {
-  const recipesDir = path.resolve('./recipes');
-  const recipes = await findRecipes(recipesDir);
-  
-  return recipes.map(recipe => {
-    const slug = recipe.path.replace('.cook', '');
-    return {
-      params: { 
-        slug: slug 
-      },
-      props: { 
-        recipePath: path.join(recipesDir, recipe.path) 
-      }
-    };
-  });
-}
-
 const { slug } = Astro.params;
-const { recipePath } = Astro.props;
+const recipesDir = path.resolve('./recipes');
+const recipePath = path.join(recipesDir, slug + '.cook');
 
 let recipe;
 try {

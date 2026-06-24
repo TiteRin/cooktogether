@@ -96,6 +96,32 @@ The same recipe directory can be shared between CookCLI and CookTogether.
 * Preparation checklist
 * Better kitchen workflow
 
+## Docker Deployment
+
+CookTogether is optimized for Docker deployment, especially on low-power devices like Raspberry Pi.
+
+### Using Docker Compose
+
+1. Clone the repository:
+   ```bash
+   git clone https://github.com/your-username/cooktogether.git
+   cd cooktogether
+   ```
+
+2. Start the application:
+   ```bash
+   docker-compose up -d
+   ```
+
+The application will be available at port `4321`. Your recipes should be placed in the `./recipes` directory to be detected automatically.
+
+### Portainer Deployment
+
+To deploy via Portainer:
+1. Go to **Stacks** > **Add stack**.
+2. Paste the content of `docker-compose.yml` into the editor.
+3. If you have cloned the project locally, you can use relative volumes. Otherwise, specify the absolute path to your recipes on the host.
+
 ## License
 
 MIT

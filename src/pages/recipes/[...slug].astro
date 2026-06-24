@@ -27,13 +27,15 @@ const { recipePath } = Astro.props;
 
 let recipe;
 try {
-  recipe = await loadRecipe(recipePath);
+  recipe = loadRecipe(recipePath);
 } catch (e) {
   return Astro.redirect('/404');
 }
+
+console.log(recipe);
 ---
 
-<Layout title={`${recipe.metadata.title || recipe.metadata.name || 'Recette'} — CookTogether`}>
+<Layout title={`${recipe.metadata.title || 'Recette'} — CookTogether`}>
   <main class="py-10">
     <div class="max-w-4xl mx-auto px-6 mb-6">
       <a href="/recipes" class="text-blue-600 hover:underline">← Retour aux recettes</a>

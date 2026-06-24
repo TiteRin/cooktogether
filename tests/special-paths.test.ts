@@ -15,7 +15,7 @@ describe('Accents and Spaces Support', () => {
     if (!fs.existsSync(subDir)) {
       fs.mkdirSync(subDir, { recursive: true });
     }
-    fs.writeFileSync(recipePath, '>> title: Gougères au miso\nFaire chauffer l\'eau.');
+    fs.writeFileSync(recipePath, '---\ntitle: Gougères au miso\n---\nFaire chauffer l\'eau.');
 
     try {
       const recipes = await findRecipes(testRecipesDir);
@@ -25,7 +25,7 @@ describe('Accents and Spaces Support', () => {
       expect(found?.path).toBe('Apéritifs/Gougères au miso.cook');
 
       // Vérifier le chargement
-      const loaded = await loadRecipe(path.join(testRecipesDir, found!.path));
+      const loaded = loadRecipe(path.join(testRecipesDir, found!.path));
       expect(loaded.metadata.title).toBe('Gougères au miso');
     } finally {
       // Nettoyage

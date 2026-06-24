@@ -1,17 +1,35 @@
 ---
-
+import Layout from '../layouts/Layout.astro';
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout title="CookTogether — Livre de Recettes">
+	<main class="max-w-2xl mx-auto px-6 py-20 flex flex-col items-center min-h-screen">
+		<header class="text-center mb-16">
+			<h1 class="text-5xl md:text-6xl font-medium tracking-tight text-slate-900 mb-4">
+				CookTogether
+			</h1>
+			<div class="h-px w-24 bg-slate-300 mx-auto mb-6"></div>
+			<p class="text-lg text-slate-600 font-serif italic italic">
+				Le plaisir de cuisiner, partagé.
+			</p>
+		</header>
+
+		<section class="w-full">
+			<div class="border border-slate-200 rounded-lg p-12 bg-white shadow-sm text-center">
+				<h2 class="text-2xl mb-6">Bienvenue dans votre livre de recettes</h2>
+				<p class="text-slate-600 mb-8 leading-relaxed">
+					Commencez par explorer vos recettes locales ou créez de nouveaux souvenirs culinaires ensemble.
+				</p>
+				<div class="flex flex-col sm:flex-row gap-4 justify-center">
+					<a href="/recipes" class="px-8 py-3 bg-slate-900 text-white rounded-md hover:bg-slate-800 transition-colors duration-200">
+						Parcourir les recettes
+					</a>
+				</div>
+			</div>
+		</section>
+
+		<footer class="mt-auto pt-16 text-slate-400 text-sm uppercase tracking-widest">
+			Est. 2026
+		</footer>
+	</main>
+</Layout>

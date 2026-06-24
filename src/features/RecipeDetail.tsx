@@ -106,7 +106,11 @@ export default function RecipeDetail({ recipe, recipeId }: Props) {
                             }
                             if (part.type === 'timer') {
                               const timer = recipe.timers[part.index];
-                              return <span key={pIndex} className="font-semibold text-green-700">{timer.name || `${timer.duration.toString()} ${timer.unit}`}</span>;
+                              return (
+                                <span key={pIndex} className="font-semibold text-green-700">
+                                  {timer.name || `${formatQuantity(timer.duration)} ${timer.unit}`}
+                                </span>
+                              );
                             }
                             return null;
                           })}
@@ -127,6 +131,22 @@ export default function RecipeDetail({ recipe, recipeId }: Props) {
                                     {ingredient.quantity && formatQuantity(ingredient.quantity)}
                                     {ingredient.unit && ` ${ingredient.unit}`}
                                     {ingredient.preparation && ` (${ingredient.preparation})`}
+                                    {pIndex < array.length - 1 ? ', ' : ''}
+                                  </span>
+                                );
+                              })}
+                          </div>
+                        )}
+                        {/* Timer list below the step text */}
+                        {item.items.some(p => p.type === 'timer') && (
+                          <div className="mt-1 text-sm text-gray-600">
+                            {item.items
+                              .filter((p): p is any => p.type === 'timer')
+                              .map((p, pIndex, array) => {
+                                const timer = recipe.timers[p.index];
+                                return (
+                                  <span key={pIndex}>
+                                    <span className="italic">⏲️ {timer.name || 'Minuteur'}</span>: {formatQuantity(timer.duration)} {timer.unit}
                                     {pIndex < array.length - 1 ? ', ' : ''}
                                   </span>
                                 );

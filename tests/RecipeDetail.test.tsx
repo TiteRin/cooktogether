@@ -215,4 +215,51 @@ describe('RecipeDetail Component', () => {
     render(<RecipeDetail recipe={recipeNoName} />);
     expect(screen.getByText('Recette')).toBeInTheDocument();
   });
+  it('should render timers with correctly formatted durations', () => {
+    const recipe = {
+      metadata: { title: 'Timer Test' },
+      ingredients: [],
+      cookware: [],
+      timers: [
+        {
+          name: 'Repos',
+          duration: { type: 'fixed', value: { type: 'decimal', value: 30 } },
+          unit: 'minutes'
+        },
+        {
+          duration: { type: 'range', min: { type: 'decimal', value: 1 }, max: { type: 'decimal', value: 2 } },
+          unit: 'minutes'
+        }
+      ],
+      sections: [
+        {
+          name: '',
+          content: [
+            {
+              type: 'step',
+              items: [
+                { type: 'text', value: 'Laissez reposer ' },
+                { type: 'timer', index: 0 },
+                { type: 'text', value: ' puis cuire ' },
+                { type: 'timer', index: 1 },
+                { type: 'text', value: '.' }
+              ]
+            }
+          ]
+        }
+      ]
+    } as any;
+
+    render(<RecipeDetail recipe={recipe} />);
+
+    // Check inline text
+    expect(screen.getByText('Repos')).toBeInTheDocument();
+    expect(screen.getByText('1-2 minutes')).toBeInTheDocument();
+
+    // Check summary below
+    expect(screen.getByText(/⏲️ Repos/)).toBeInTheDocument();
+    expect(screen.getByText(/: 30 minutes/)).toBeInTheDocument();
+    expect(screen.getByText(/⏲️ Minuteur/)).toBeInTheDocument();
+    expect(screen.getByText(/: 1-2 minutes/)).toBeInTheDocument();
+  });
 });

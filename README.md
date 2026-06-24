@@ -115,12 +115,17 @@ CookTogether is optimized for Docker deployment, especially on low-power devices
 
 The application will be available at port `4321`. Your recipes should be placed in the `./recipes` directory to be detected automatically.
 
-### Portainer Deployment
+### Portainer Deployment & Environment Variables
 
 To deploy via Portainer:
 1. Go to **Stacks** > **Add stack**.
 2. Paste the content of `docker-compose.yml` into the editor.
-3. If you have cloned the project locally, you can use relative volumes. Otherwise, specify the absolute path to your recipes on the host.
+3. **Environment Variables**: Portainer allows you to define variables in the "Environment variables" section below the editor. You can use these variables in your `docker-compose.yml` (e.g., `${RECIPES_PATH}`).
+4. **Volumes**: If you are using a shared volume or a specific path on your host, it is recommended to use an absolute path:
+   ```yaml
+   volumes:
+     - ${RECIPES_PATH}:/app/recipes
+   ```
 
 ## License
 

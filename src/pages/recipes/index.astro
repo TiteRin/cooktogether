@@ -1,0 +1,16 @@
+---
+import Layout from '/src/layouts/Layout.astro';
+import RecipeList from '/src/features/RecipeList';
+import { findRecipes } from '/src/lib/recipeDiscovery';
+import path from 'node:path';
+
+const recipesDir = path.resolve('./recipes');
+const recipes = await findRecipes(recipesDir);
+---
+
+<Layout title="Mes Recettes — CookTogether">
+  <main class="max-w-4xl mx-auto px-6 py-10">
+    <h1 class="text-4xl font-bold mb-8">Mes Recettes</h1>
+    <RecipeList recipes={recipes} client:load />
+  </main>
+</Layout>

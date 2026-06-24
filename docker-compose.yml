@@ -1,0 +1,9 @@
+services:
+  web:
+    build: .
+    ports:
+      - "4321:4321"
+    volumes:
+      - ./recipes:/app/recipes
+    environment:
+      - NODE_ENV=production
